@@ -4,65 +4,65 @@
       <v-container fill-height>
         <v-col class="my-4" align="center" justify="center" fill-height>
           <v-file-input color="primary" outlined v-model="file" accept=".xlsx" label="Subir excel" @change="uploadFile"></v-file-input>
-          <template v-if="file !== null">
-            <v-data-table
-              width="100%"
-              class="elevation-4"
-              :loading="loading"
-              :headers="[
-                {
-                  text: 'CODIGO',
-                  value: 'CODIGO'
-                },
-                {
-                  text: 'EQUIPO',
-                  value: 'EQUIPO'
-                },
-                {
-                  text: 'Inventario',
-                  value: 'Inventario'
-                },
-                {
-                  text: 'MARCA',
-                  value: 'MARCA'
-                },
-                {
-                  text: 'Modelo',
-                  value: 'Modelo'
-                },
-                {
-                  text: 'SCR',
-                  value: 'SCR'
-                },
-                {
-                  text: 'Serie',
-                  value: 'Serie'
-                },
-                {
-                  text: 'UBICACIÓN',
-                  value: 'UBICACIÓN'
-                },
-                {
-                  text: 'Ver informe',
-                  value: 'report'
-                }
-              ]"
-              :items="jsonEquipos"
-              :items-per-page="10">
-              <template v-slot:item.report="{ item }">
-                <v-btn color="primary" fab depressed x-small @click="displayReport(item)">
-                  <v-icon small>
-                    mdi-eye
-                  </v-icon>
+          <v-expand-transition>
+              <v-card v-show="isValidFile && !loading && jsonEquipos.length > 0">
+                <v-data-table
+                  :loading="loading"
+                  :headers="[
+                    {
+                      text: 'Codigo',
+                      value: 'CODIGO'
+                    },
+                    {
+                      text: 'Equipo',
+                      value: 'EQUIPO'
+                    },
+                    {
+                      text: 'Inventario',
+                      value: 'Inventario'
+                    },
+                    {
+                      text: 'Marca',
+                      value: 'MARCA'
+                    },
+                    {
+                      text: 'Modelo',
+                      value: 'Modelo'
+                    },
+                    {
+                      text: 'SCR',
+                      value: 'SCR'
+                    },
+                    {
+                      text: 'Serie',
+                      value: 'Serie'
+                    },
+                    {
+                      text: 'Ubicación',
+                      value: 'UBICACIÓN'
+                    },
+                    {
+                      text: 'Ver informe',
+                      value: 'report'
+                    }
+                  ]"
+                  :items="jsonEquipos"
+                  :items-per-page="10">
+                  <template v-slot:item.report="{ item }">
+                    <v-btn color="primary" fab depressed x-small @click="displayReport(item)">
+                      <v-icon small>
+                        mdi-eye
+                      </v-icon>
+                    </v-btn>
+                  </template>
+                </v-data-table>
+                <v-btn class="my-4" color="primary" rounded @click="displayAllReports">
+                  <v-icon left>
+                    mdi-download
+                  </v-icon>descargar informe completo
                 </v-btn>
-              </template>
-            </v-data-table>
-            <v-btn class="mt-4  " color="primary" rounded @click="displayAllReports">
-              <v-icon left>
-                mdi-download
-              </v-icon>descargar informe completo
-            </v-btn>
-          </template>
+              </v-card>
+          </v-expand-transition>
         </v-col>
       </v-container>
     </v-app>
@@ -72,6 +72,7 @@
 import XLSX from 'xlsx';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import assetsBase64 from './assets/base64';
 
 export default {
   data: function () {
@@ -82,9 +83,14 @@ export default {
       loading: false
     }
   },
+  computed: {
+    isValidFile () {
+      return Object.prototype.toString.call(this.file) === '[object File]'
+    }
+  },
   methods: {
     uploadFile() {
-      if (this.file !== null) {
+      if (this.isValidFile) {
         this.loading = true
         const fileReader = new FileReader()
         fileReader.onload = () => {
