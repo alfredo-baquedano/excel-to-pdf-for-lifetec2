@@ -236,7 +236,6 @@ export default {
         }
       })
       doc.setFontSize(9)
-
       doc.setFontStyle("normal")
 
       doc.text('NOTA: Para asegurar el correcto funcionamiento de los equipos médicos críticos y eliminar posibilidades de fugas de corriente indeseadas y peligrosas, Se recomienda por norma No reemplazar enchufes, se debe cambiar cable de poder completo nuevo con conexión blindada.', 15, 220, { maxWidth: 180 })
@@ -255,7 +254,6 @@ export default {
       doc.text('Manuel Bayón 3273  THNO', 160, 290)
 
       return doc
-      
     },
     displayAllReports () {
       let report = new jsPDF()
