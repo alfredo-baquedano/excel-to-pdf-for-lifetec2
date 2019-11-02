@@ -256,10 +256,10 @@ export default {
     displayAllReports () {
       let report = new jsPDF()
       this.jsonEquipos.forEach((equipment, index) => {
-        if (index < 350) {
           this.addReport(report, equipment)
-          report.addPage()
-        }
+          if (index < this.jsonEquipos.length -1) {
+            report.addPage()
+          }
       })
       report.save('informe-completo.pdf')
     },
