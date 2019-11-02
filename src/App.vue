@@ -208,9 +208,9 @@ export default {
           ],
           [
             {
-              content:'Observaciones',
+              content:'Observaciones:\n'+ (equipo.Observaciones !== undefined ? equipo.Observaciones : ''),
               colSpan: 4,
-              styles: { minCellHeight: 20 }
+              styles: { minCellHeight: 20, overflow: 'linebreak' }
             }
           ]
         ],
