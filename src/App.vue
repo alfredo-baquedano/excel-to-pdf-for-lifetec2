@@ -241,8 +241,8 @@ export default {
       doc.setFontSize(10)
       doc.setFontStyle("bold")
       
-      doc.addImage(assetsBase64.lifetecSign, 'JPEG', 15, 235 + 2, 45, 30)
-      doc.text('LIFETEC', 30, 260, { maxWidth: 180 })
+      doc.addImage(assetsBase64.lifetecSign, 'JPEG', 17, 240 + 2, 45, 25)
+      doc.text('LIFETEC', 32.5, 270, { maxWidth: 180 })
      
       doc.setFontSize(9)
       doc.setFontStyle("italic")
