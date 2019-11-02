@@ -217,13 +217,11 @@ export default {
         margin: {top: 90},
         didDrawCell: data => {
           if (data.section === 'body' && data.column.index === 2 && data.row.index !== 0 && data.row.index !== 7) {
-            console.log('T'+ data.row.index, equipo['T'+data.row.index])
             if (equipo['T'+data.row.index] === 'SI') {
               doc.addImage(assetsBase64.checkMark, 'JPEG', data.cell.x + 4.6, data.cell.y + 2, 6, 4)
             }
           }
           if (data.section === 'body' && data.column.index === 3 && data.row.index !== 0 && data.row.index !== 7) {
-            console.log('T'+ data.row.index, equipo['T'+data.row.index])
             if (equipo['T'+data.row.index] !== 'SI') {
               doc.addImage(assetsBase64.checkMark, 'JPEG', data.cell.x + 4.6, data.cell.y + 2, 6, 4)
             }
@@ -269,11 +267,6 @@ export default {
       var report = new jsPDF()
       this.addReport(report, equipment)
       report.output('dataurlnewwindow', equipment.Inventario + '.pdf')
-    },
-    converXLSToJSON() {
-      /*
-      const json = XLSX.utils.sheet_to_json(first_worksheet, { header: 1 });
-      */
     }
   },
 }
