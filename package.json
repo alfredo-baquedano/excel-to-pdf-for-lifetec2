@@ -16,7 +16,7 @@
     "jspdf-autotable": "^3.2.10",
     "vue": "^2.6.10",
     "vuetify": "^2.1.0",
-    "xlsx": "^0.15.1"
+    "xlsx": "^0.17.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.0.0",
